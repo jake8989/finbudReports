@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package reports;
+
+service ReportService {
+    rpc GenerateReport(ReportRequest) returns (ReportResponse) {}
+}
+
+message ReportRequest {
+    string username = 1;
+    string year = 2;
+    string month = 3;
+}
+
+message ReportResponse {
+    bool success = 1;
+    string message = 2;
+    bytes monthly_report = 3;
+}                                                               
