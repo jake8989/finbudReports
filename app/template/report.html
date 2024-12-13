@@ -10,7 +10,7 @@
 
     <style>
         @page{
-            margin: 20px;
+            margin: 2cm;
         }
         
         header {
@@ -21,31 +21,14 @@
             /* height: 2cm; */
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #ccc;
+           
             /* padding: 0 ; */
+            z-index: 100;
         }
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            border-top: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-            font-size: 0.8em;
-            color: #555;
-        }
-        @page {
-         @top-center {
-             content: element(header); /* Pulls the header content */
-        }
-
-        @bottom-center {
-           content: element(footer); /* Pulls the footer content */
-        }
-       }
+        
+        
         main {
-            margin-top: 4cm;
+            margin-top: 2cm;
             margin-bottom: 3cm;     
         }
         .page{
@@ -69,7 +52,7 @@
         }
         .general-margin{
             margin-top: 3cm;
-            margin-bottom: 2cm;
+            margin-bottom: 3cm;
             text-align: center;
         }
         .font-size-normal{
@@ -87,7 +70,8 @@
         .financial-table {
         width: 100%;
         border-collapse: collapse;
-        /* margin-top: 20px; */
+         padding: 3cm;
+         position: relative;
        }
 
         .financial-table th, .financial-table td {
@@ -120,6 +104,12 @@
         .financial-table td, .financial-table th {
             page-break-before: always; /* Ensure that each cell starts on a new page if needed */
         }
+        .font-amount{
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .opacity{
+            opacity: 0.5;
+        }
         
 
     </style>
@@ -127,21 +117,21 @@
 <body>
     <header>
         <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-        <img src="https://drive.google.com/uc?export=view&id=1SLZHZW-hfPg-kv3SHc28HEfj4zAw_F_C" alt="Google Drive Image" class="logo-class">
+        <img src="https://drive.google.com/uc?export=view&id=1SLZHZW-hfPg-kv3SHc28HEfj4zAw_F_C" alt="Google Drive Image" class="logo-class opacity">
 
-        <h1 class="kaushan-script-regular">Finbud</h1>
+        <h1 class="kaushan-script-regular opacity">FinBud</h1>
     </header>
 <div class="front-page page"> 
     <main>
         <div class="lancelot-regular">
-            <p>Report id: {323-4232-334232-fgfe}</p>
-            <p>Date Created: 23 July, 2024</p>
+            <p>Report id: <span class="font-amount">{{data.reportId}}</span> </p>
+            <p>Date Created: <span class="font-amount">{{data.date_created}}</span></p>
         </div>
-        <h1 class="kaushan-script-regular general-margin">Monthly Report {Month} {Year}</h1>
+        <h1 class="kaushan-script-regular general-margin">Monthly Report {{data.month}} {{data.year}}</h1>
         <p class="lancelot-regular general-margin">
             for
         </p>
-        <h1 class="kaushan-script-regular general-margin">{username}</h1>
+        <h1 class="kaushan-script-regular general-margin">{{data.username}}</h1>
         <p class="lancelot-regular general-margin font-size-normal">
             This Finbud Financial Report has been carefully curated to provide a comprehensive overview of your current financial health and offer insights into the key aspects of your financial journey. Our goal is to empower you with the information you need to make informed decisions about your investments, spending habits, and overall financial strategy. By analyzing your income and expenses this report presents a clear picture of your financial standing as of the date mentioned above.
         </p>
@@ -149,7 +139,7 @@
    
 </div>
 <div class="page-break-before general-margin">
-    <h1 class="lancelot-regular general-margin">Expenses</h1>
+    <h2 class="lancelot-regular">Expenses (this month) </h2>
     <table class="financial-table lancelot-regular">
         <thead>
             <tr>
@@ -157,34 +147,44 @@
                 <th>Expense Date</th>
                 <th>Description</th>
                 <th>Category</th>
-                <th>Amount</th>
+                <th>Amount (in Rupees)</th>
             </tr>
         </thead>
         <tbody>
+            {% for expenses in data.transactions %}
             <tr>
-                <td>12345</td>
-                <td>2024-07-01</td>
-                <td>This is my salary Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, itaque.</td>
-                <td>Salary</td>
-                <td>$5,000</td>
+                <td>{{expenses.expenseId}}</td>
+                <td class="font-amount">{{expenses.date}}</td>
+                <td>{{expenses.description}}</td>
+                <td>{{expenses.category}}</td>
+                <td class="font-amount">{{expenses.amount}}</td>
             </tr>
-            <tr>
-                <td>12345</td>
-                <td>2024-07-01</td>
-                <td>This is my salary Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, itaque.</td>
-                <td>Salary</td>
-                <td>$5,000</td>
-            </tr>
-            
-            <!-- Add more rows as needed -->
+            {% endfor %}
         </tbody>
     </table>
-
+    <h2 class="lancelot-regular">Accumulated Category Wise Expense (this month)</h2>
+    <table class="financial-table lancelot-regular">
+        <thead>
+            <tr>
+                <th>Category(custom categories)</th>
+                <th>Total Expense (in Rupees)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categories in data.accumulatedCategory.keys() %}
+            <tr>
+                <td>{{categories}}</td>
+                <td class="font-amount">{{data.accumulatedCategory[categories]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h1 class="lancelot-regular font-size-normal">Total Expenses (till date): <span class="font-amount"> R.S. {{data.totalExpense}}</span></h1>
 </div>
-
-    <footer>
-        <p class="lancelot-regular">made with love by Jayant</p>
-    </footer>
+<!-- <div class="page-break-before general-margin">
+    <h2 class="lancelot-regular">Goals Created in this month (till date)</h2>
+</div> -->
+ 
 
 </body>
 </html>
