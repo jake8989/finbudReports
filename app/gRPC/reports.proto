@@ -15,5 +15,5 @@ message ReportRequest {
 message ReportResponse {
     bool success = 1;
     string message = 2;
-    bytes monthly_report = 3;
+    string report_id = 3;
 }                                                               

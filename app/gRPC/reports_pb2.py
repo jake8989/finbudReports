@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rreports.proto\x12\x07reports\">\n\rReportRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x0c\n\x04year\x18\x02 \x01(\t\x12\r\n\x05month\x18\x03 \x01(\t\"J\n\x0eReportResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x16\n\x0emonthly_report\x18\x03 \x01(\x0c\x32T\n\rReportService\x12\x43\n\x0eGenerateReport\x12\x16.reports.ReportRequest\x1a\x17.reports.ReportResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rreports.proto\x12\x07reports\">\n\rReportRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x0c\n\x04year\x18\x02 \x01(\t\x12\r\n\x05month\x18\x03 \x01(\t\"E\n\x0eReportResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x11\n\treport_id\x18\x03 \x01(\t2T\n\rReportService\x12\x43\n\x0eGenerateReport\x12\x16.reports.ReportRequest\x1a\x17.reports.ReportResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -34,7 +34,7 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_REPORTREQUEST']._serialized_start=26
   _globals['_REPORTREQUEST']._serialized_end=88
   _globals['_REPORTRESPONSE']._serialized_start=90
-  _globals['_REPORTRESPONSE']._serialized_end=164
-  _globals['_REPORTSERVICE']._serialized_start=166
-  _globals['_REPORTSERVICE']._serialized_end=250
+  _globals['_REPORTRESPONSE']._serialized_end=159
+  _globals['_REPORTSERVICE']._serialized_start=161
+  _globals['_REPORTSERVICE']._serialized_end=245
 # @@protoc_insertion_point(module_scope)
